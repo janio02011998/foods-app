@@ -1,4 +1,3 @@
-import Image from "next/image";
 import CategoryList from "./_components/category-list";
 import Header from "./_components/header";
 import Search from "./_components/search";
@@ -7,6 +6,7 @@ import { Button } from "./_components/ui/button";
 import Link from "next/link";
 import { ChevronRightIcon } from "lucide-react";
 import { db } from "./_lib/prisma";
+import PromoBanner from "./_components/promo-banner";
 
 async function Home() {
   const products = await db.product.findMany({
@@ -35,14 +35,9 @@ async function Home() {
         <CategoryList />
       </div>
       <div className="px-5 pt-6">
-        <Image
-          src={"/promo-banner-01.png"}
-          alt={"Até 30% de desconto em pizzas"}
-          width={0}
-          height={0}
-          className="h-auto w-full object-contain"
-          sizes="100vw"
-          quality={100}
+        <PromoBanner
+          src="/promo-banner-01.png"
+          alt="Até 30% de desconto em pizzas"
         />
       </div>
       <div className="space-y-4 pt-6">
@@ -61,6 +56,13 @@ async function Home() {
           </Button>
         </div>
         <ProductList products={products} />
+      </div>
+
+      <div className="px-5 pt-6">
+        <PromoBanner
+          src={"/promo-banner-02.png"}
+          alt={"A partir de R$17,90 em lanches"}
+        />
       </div>
     </>
   );
