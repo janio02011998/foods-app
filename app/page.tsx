@@ -2,8 +2,29 @@ import Image from "next/image";
 import CategoryList from "./_components/category-list";
 import Header from "./_components/header";
 import Search from "./_components/search";
+import ProductList from "./_components/product-list";
+import { Button } from "./_components/ui/button";
+import Link from "next/link";
+import { ChevronRightIcon } from "lucide-react";
+import { db } from "./_lib/prisma";
 
-export default function Home() {
+async function Home() {
+  const products = await db.product.findMany({
+    where: {
+      discountPercentage: {
+        gt: 0,
+      },
+    },
+    take: 10,
+    include: {
+      restaurant: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
   return (
     <>
       <Header />
@@ -15,7 +36,7 @@ export default function Home() {
       </div>
       <div className="px-5 pt-6">
         <Image
-          src={"promo-banner-01.png"}
+          src={"/promo-banner-01.png"}
           alt={"Até 30% de desconto em pizzas"}
           width={0}
           height={0}
@@ -24,6 +45,25 @@ export default function Home() {
           quality={100}
         />
       </div>
+      <div className="space-y-4 pt-6">
+        <div className="flex items-center justify-between px-5">
+          <h2 className="font-semibold">Pedidos Recomendados</h2>
+
+          <Button
+            variant="ghost"
+            className="h-fit p-0 text-primary hover:bg-transparent"
+            asChild
+          >
+            <Link href="/products/recommended">
+              Ver todos
+              <ChevronRightIcon size={16} />
+            </Link>
+          </Button>
+        </div>
+        <ProductList products={products} />
+      </div>
     </>
   );
 }
+
+export default Home;
