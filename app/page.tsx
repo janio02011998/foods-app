@@ -3,13 +3,13 @@ import Header from "./_components/header";
 import Search from "./_components/search";
 import ProductList from "./_components/product-list";
 import { Button } from "./_components/ui/button";
-import Link from "next/link";
 import { ChevronRightIcon } from "lucide-react";
 import { db } from "./_lib/prisma";
 import PromoBanner from "./_components/promo-banner";
 import RestaurantList from "./_components/restaurant-list";
+import Link from "next/link";
 
-async function Home() {
+const Home = async () => {
   const products = await db.product.findMany({
     where: {
       discountPercentage: {
@@ -32,13 +32,15 @@ async function Home() {
       <div className="px-5 pt-6">
         <Search />
       </div>
+
       <div className="px-5 pt-6">
         <CategoryList />
       </div>
+
       <div className="px-5 pt-6">
         <PromoBanner
           src="/promo-banner-01.png"
-          alt="Até 30% de desconto em pizzas"
+          alt="Até 30% de desconto em pizzas!"
         />
       </div>
 
@@ -62,8 +64,8 @@ async function Home() {
 
       <div className="px-5 pt-6">
         <PromoBanner
-          src={"/promo-banner-02.png"}
-          alt={"A partir de R$17,90 em lanches"}
+          src="/promo-banner-02.png"
+          alt="A partir de R$17,90 em lanches"
         />
       </div>
 
@@ -76,7 +78,7 @@ async function Home() {
             className="h-fit p-0 text-primary hover:bg-transparent"
             asChild
           >
-            <Link href="/products/recommended">
+            <Link href="/restaurants/recommended">
               Ver todos
               <ChevronRightIcon size={16} />
             </Link>
@@ -86,6 +88,6 @@ async function Home() {
       </div>
     </>
   );
-}
+};
 
 export default Home;
