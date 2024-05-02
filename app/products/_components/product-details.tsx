@@ -46,8 +46,8 @@ const ProductDetails = ({
   };
 
   return (
-    <div className="p-5">
-      <div className="flex items-center gap-[0.375rem]">
+    <div className="py-5">
+      <div className="flex items-center gap-[0.375rem] px-5">
         <div className="relative h-4 w-4">
           <Image
             src={product?.restaurant.imageUrl}
@@ -61,9 +61,9 @@ const ProductDetails = ({
         </span>
       </div>
 
-      <h1 className="mb-3 mt-1 text-xl font-semibold">{product.name}</h1>
+      <h1 className="mb-3 mt-1 px-5 text-xl font-semibold">{product.name}</h1>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between px-5">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-semibold">
@@ -78,7 +78,7 @@ const ProductDetails = ({
           )}
         </div>
 
-        <div className="flex items-center gap-3 text-center">
+        <div className="flex items-center gap-3 px-5 text-center">
           <Button
             onClick={handleDecreaseQuantityClick}
             size="icon"
@@ -93,42 +93,44 @@ const ProductDetails = ({
           </Button>
         </div>
       </div>
-
-      <Card className="mt-6 flex justify-around py-3">
-        <div className="flex flex-col items-center ">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <span>Entrega</span>
-            <BikeIcon size={14} />
+      <div className="px-5">
+        <Card className="mt-6 flex justify-around py-3">
+          <div className="flex flex-col items-center ">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <span>Entrega</span>
+              <BikeIcon size={14} />
+            </div>
+            {Number(product.restaurant.deliveryFee) > 0 ? (
+              <p className="text-sm font-semibold">
+                {formatCurrency(Number(product.restaurant.deliveryFee))}
+              </p>
+            ) : (
+              <p className="text-sm font-semibold">Grátis</p>
+            )}
           </div>
-          {Number(product.restaurant.deliveryFee) > 0 ? (
-            <p className="text-sm font-semibold">
-              {formatCurrency(Number(product.restaurant.deliveryFee))}
-            </p>
-          ) : (
-            <p className="text-sm font-semibold">Grátis</p>
-          )}
-        </div>
 
-        <div className="flex flex-col items-center ">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <span>Entrega</span>
-            <TimerIcon size={14} />
+          <div className="flex flex-col items-center ">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <span>Entrega</span>
+              <TimerIcon size={14} />
+            </div>
+            {Number(product.restaurant.deliveryTimeMinutes) > 0 ? (
+              <p className="text-sm font-semibold">
+                {product.restaurant.deliveryTimeMinutes} min
+              </p>
+            ) : (
+              <p className="text-sm font-semibold">Grátis</p>
+            )}
           </div>
-          {Number(product.restaurant.deliveryTimeMinutes) > 0 ? (
-            <p className="text-sm font-semibold">
-              {product.restaurant.deliveryTimeMinutes} min
-            </p>
-          ) : (
-            <p className="text-sm font-semibold">Grátis</p>
-          )}
-        </div>
-      </Card>
-      <div className="mt-6 space-y-3">
+        </Card>
+      </div>
+
+      <div className="mt-6 space-y-3 px-5">
         <h3 className="font-semibold">Sobre</h3>
         <p className="text-sm text-muted-foreground">{product.description}</p>
       </div>
       <div className="mt-6 space-y-3">
-        <h3 className="font-semibold">Sucos</h3>
+        <h3 className="px-5 font-semibold">Sucos</h3>
         <ProductList products={complementaryProducts} />
       </div>
     </div>
