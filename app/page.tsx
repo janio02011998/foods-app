@@ -47,7 +47,6 @@ const Home = async () => {
       <div className="space-y-4 pt-6">
         <div className="flex items-center justify-between px-5">
           <h2 className="font-semibold">Pedidos Recomendados</h2>
-
           <Button
             variant="ghost"
             className="h-fit p-0 text-primary hover:bg-transparent"
