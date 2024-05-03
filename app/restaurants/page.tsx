@@ -23,7 +23,7 @@ const Restaurants = () => {
     fetchRestaurants();
   }, [searchParams]);
 
-  if (searchFor) {
+  if (!searchFor) {
     return notFound();
   }
 
