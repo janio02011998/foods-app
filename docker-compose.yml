@@ -12,6 +12,12 @@ services:
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgpassword
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
 
 volumes:
   pg-data:
