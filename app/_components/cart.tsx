@@ -5,11 +5,13 @@ const Cart = () => {
   const { products } = useCart();
 
   return (
-    <>
-      {products.map((product) => (
-        <CartItem key={product.id} cartProduct={product} />
-      ))}
-    </>
+    <div className="py-5">
+      <div className="space-y-4">
+        {products.map((product) => (
+          <CartItem key={product.id} cartProduct={product} />
+        ))}
+      </div>
+    </div>
   );
 };
 
