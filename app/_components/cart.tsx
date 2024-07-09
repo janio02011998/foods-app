@@ -1,15 +1,13 @@
-import { Product } from "@prisma/client";
 import { useCart } from "../_contexts/cart";
+import CartItem from "./cart-item";
 
 const Cart = () => {
   const { products } = useCart();
 
   return (
     <>
-      {products.map((product: Product) => (
-        <div key={product.id}>
-          {product.id} - {product.name}
-        </div>
+      {products.map((product) => (
+        <CartItem key={product.id} cartProduct={product} />
       ))}
     </>
   );
