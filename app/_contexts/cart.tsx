@@ -10,7 +10,7 @@ export interface CartProduct extends Product {
 
 interface ICartContext {
   products: CartProduct[];
-  removeProducts: (productId: string) => void;
+  removeProductFromCart: (productId: string) => void;
   addProductsToCart: (product: Product, quantity: number) => void;
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
@@ -22,7 +22,7 @@ interface ICartProvider {
 
 export const CartContext = createContext<ICartContext>({
   products: [],
-  removeProducts: () => {},
+  removeProductFromCart: () => {},
   addProductsToCart: () => {},
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
@@ -88,7 +88,7 @@ export const CartProvider = ({ children }: ICartProvider) => {
     setProducts((prev) => [...prev, { ...product, quantity }]);
   };
 
-  const removeProducts = (productId: string) => {
+  const removeProductFromCart = (productId: string) => {
     return setProducts((prev) =>
       prev.filter((product) => product.id !== productId),
     );
@@ -98,8 +98,8 @@ export const CartProvider = ({ children }: ICartProvider) => {
     <CartContext.Provider
       value={{
         products,
-        removeProducts,
         addProductsToCart,
+        removeProductFromCart,
         decreaseProductQuantity,
         increaseProductQuantity,
       }}
