@@ -5,7 +5,12 @@ import DeliveryInfo from "@/app/_components/delivery-info";
 import DiscountBadge from "@/app/_components/discount-badge";
 import ProductList from "@/app/_components/product-list";
 import { Button } from "@/app/_components/ui/button";
-import { Sheet, SheetContent } from "@/app/_components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/app/_components/ui/sheet";
 import { useCart } from "@/app/_contexts/cart";
 import {
   calculateProductTotalPrice,
@@ -126,7 +131,11 @@ const ProductDetails = ({
       </div>
 
       <Sheet open={isCartOpen} onOpenChange={handleCloseCart}>
-        <SheetContent>
+        <SheetContent className="w-[80vw]">
+          <SheetHeader>
+            <SheetTitle className="text-left">Sacola</SheetTitle>
+          </SheetHeader>
+
           <Cart />
         </SheetContent>
       </Sheet>
