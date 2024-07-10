@@ -1,6 +1,7 @@
 import { useCart } from "../_contexts/cart";
 import { formatCurrency } from "../_helpers/price";
 import CartItem from "./cart-item";
+import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
 
@@ -23,7 +24,7 @@ const Cart = () => {
               <span>{formatCurrency(subTotalPrice)}</span>
             </div>
 
-            <Separator className="h-[0.5px] bg-muted-foreground" />
+            <Separator />
 
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Descontos</span>
@@ -50,6 +51,8 @@ const Cart = () => {
           </CardContent>
         </Card>
       </div>
+
+      <Button className="mt-6 w-full">Finalizar Pedido</Button>
     </div>
   );
 };

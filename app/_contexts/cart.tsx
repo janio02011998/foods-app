@@ -24,7 +24,7 @@ interface ICartContext {
   subTotalPrice: number;
   totalDiscounts: number;
   removeProductFromCart: (productId: string) => void;
-  addProductsToCart: (product: Product, quantity: number) => void;
+  addProductsToCart: (product: CartProduct, quantity: number) => void;
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
 }
@@ -96,7 +96,7 @@ export const CartProvider = ({ children }: ICartProvider) => {
     );
   };
 
-  const addProductsToCart = (product: Product, quantity: number) => {
+  const addProductsToCart = (product: CartProduct, quantity: number) => {
     const isProductAlreadyOnCart = products.some(
       (cartProduct) => cartProduct.id === product.id,
     );
