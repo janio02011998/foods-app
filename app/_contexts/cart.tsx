@@ -2,7 +2,8 @@
 "use client";
 
 import { Product } from "@prisma/client";
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useMemo, useState } from "react";
+import { calculateProductTotalPrice } from "../_helpers/price";
 
 export interface CartProduct extends Product {
   quantity: number;
@@ -10,6 +11,9 @@ export interface CartProduct extends Product {
 
 interface ICartContext {
   products: CartProduct[];
+  totalPrice: number;
+  subTotalPrice: number;
+  totalDiscounts: number;
   removeProductFromCart: (productId: string) => void;
   addProductsToCart: (product: Product, quantity: number) => void;
   decreaseProductQuantity: (productId: string) => void;
@@ -22,6 +26,9 @@ interface ICartProvider {
 
 export const CartContext = createContext<ICartContext>({
   products: [],
+  totalPrice: 0,
+  subTotalPrice: 0,
+  totalDiscounts: 0,
   removeProductFromCart: () => {},
   addProductsToCart: () => {},
   decreaseProductQuantity: () => {},
@@ -30,6 +37,21 @@ export const CartContext = createContext<ICartContext>({
 
 export const CartProvider = ({ children }: ICartProvider) => {
   const [products, setProducts] = useState<CartProduct[]>([]);
+
+  const subTotalPrice = useMemo(() => {
+    return products.reduce(
+      (acc, product) => acc + Number(product.price) * product.quantity,
+      0,
+    );
+  }, [products]);
+
+  const totalPrice = useMemo(() => {
+    return products.reduce((acc, product) => {
+      return acc + calculateProductTotalPrice(product) * product.quantity;
+    }, 0);
+  }, [products]);
+
+  const totalDiscounts = subTotalPrice - totalPrice;
 
   const decreaseProductQuantity = (productId: string) => {
     return setProducts((prev) =>
@@ -97,6 +119,9 @@ export const CartProvider = ({ children }: ICartProvider) => {
   return (
     <CartContext.Provider
       value={{
+        totalPrice,
+        subTotalPrice,
+        totalDiscounts,
         products,
         addProductsToCart,
         removeProductFromCart,
