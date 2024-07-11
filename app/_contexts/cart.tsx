@@ -11,6 +11,7 @@ export interface CartProduct
       restaurant: {
         select: {
           deliveryFee: true;
+          id: true;
         };
       };
     };
@@ -30,6 +31,7 @@ interface ICartContext {
         restaurant: {
           select: {
             deliveryFee: true;
+            id: true;
           };
         };
       };
@@ -113,6 +115,7 @@ export const CartProvider = ({ children }: ICartProvider) => {
         restaurant: {
           select: {
             deliveryFee: true;
+            id: true;
           };
         };
       };
