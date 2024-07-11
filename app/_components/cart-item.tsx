@@ -61,18 +61,18 @@ const CartItem = ({ cartProduct }: CartItemsProps) => {
             <Button
               onClick={handleDecreaseQuantityClick}
               size="icon"
-              className="h-8 w-8 border border-solid border-muted-foreground"
+              className="h-7 w-7 border border-solid border-muted-foreground"
               variant="ghost"
             >
-              <ChevronLeftIcon size={18} />
+              <ChevronLeftIcon size={16} />
             </Button>
-            <span className="w-4 text-sm">{cartProduct.quantity}</span>
+            <span className="w-3 text-xs">{cartProduct.quantity}</span>
             <Button
               size={"icon"}
               onClick={handleIncreaseQuantityClick}
-              className="h-8 w-8"
+              className="h-7 w-7"
             >
-              <ChevronRightIcon size={18} />
+              <ChevronRightIcon size={16} />
             </Button>
           </div>
         </div>
