@@ -24,7 +24,18 @@ interface ICartContext {
   subTotalPrice: number;
   totalDiscounts: number;
   removeProductFromCart: (productId: string) => void;
-  addProductsToCart: (product: CartProduct, quantity: number) => void;
+  addProductsToCart: (
+    product: Prisma.ProductGetPayload<{
+      include: {
+        restaurant: {
+          select: {
+            deliveryFee: true;
+          };
+        };
+      };
+    }>,
+    quantity: number,
+  ) => void;
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
 }
@@ -96,7 +107,18 @@ export const CartProvider = ({ children }: ICartProvider) => {
     );
   };
 
-  const addProductsToCart = (product: CartProduct, quantity: number) => {
+  const addProductsToCart = (
+    product: Prisma.ProductGetPayload<{
+      include: {
+        restaurant: {
+          select: {
+            deliveryFee: true;
+          };
+        };
+      };
+    }>,
+    quantity: number,
+  ) => {
     const isProductAlreadyOnCart = products.some(
       (cartProduct) => cartProduct.id === product.id,
     );
