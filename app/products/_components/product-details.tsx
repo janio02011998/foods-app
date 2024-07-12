@@ -61,7 +61,7 @@ const ProductDetails = ({
 
   const handleToAddClick = () => {
     const hasDifferentRestaurantProduct = products.some(
-      (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
+      (cartProduct) => cartProduct.restaurantId! == product.restaurantId,
     );
 
     if (hasDifferentRestaurantProduct) {
@@ -168,12 +168,16 @@ const ProductDetails = ({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure ?</AlertDialogTitle>
-            <AlertDialogDescription>bla bla bla</AlertDialogDescription>
+            <AlertDialogTitle>
+              Você só pode adicionar itens de um restaurante por vez
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              Deseja mesmo adicionar esse produto? Essa ação limpará sua sacola.
+            </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction>Esvaziar sacola e adicionar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
