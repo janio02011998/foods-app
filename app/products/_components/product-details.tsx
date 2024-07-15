@@ -59,8 +59,8 @@ const ProductDetails = ({
   const handleCloseConfirmationDialog = () =>
     setIsConfirmationDialogOpen(false);
 
-  const addToCart = () => {
-    addProductsToCart(product, quantity);
+  const addToCart = ({ emptyCart }: { emptyCart?: boolean }) => {
+    addProductsToCart({ product, quantity, emptyCart });
     setIsCartOpen(true);
   };
 
@@ -73,7 +73,9 @@ const ProductDetails = ({
       return setIsConfirmationDialogOpen(true);
     }
 
-    addToCart();
+    addToCart({
+      emptyCart: false,
+    });
   };
 
   const handleIncreaseQuantityClick = () =>
@@ -184,7 +186,7 @@ const ProductDetails = ({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={addToCart}>
+            <AlertDialogAction onClick={() => addToCart({ emptyCart: true })}>
               Esvaziar sacola e adicionar
             </AlertDialogAction>
           </AlertDialogFooter>
