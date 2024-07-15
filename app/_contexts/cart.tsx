@@ -67,12 +67,14 @@ export const CartProvider = ({ children }: ICartProvider) => {
   }, [products]);
 
   const totalPrice = useMemo(() => {
-    return products.reduce((acc, product) => {
-      return acc + calculateProductTotalPrice(product) * product.quantity;
-    }, 0);
+    return (
+      products.reduce((acc, product) => {
+        return acc + calculateProductTotalPrice(product) * product.quantity;
+      }, 0) + Number(products?.[0]?.restaurant?.deliveryFee)
+    );
   }, [products]);
 
-  const totalDiscounts = subTotalPrice - totalPrice;
+  const totalDiscounts = Math.abs(subTotalPrice - totalPrice);
 
   const decreaseProductQuantity = (productId: string) => {
     return setProducts((prev) =>
