@@ -61,7 +61,7 @@ const ProductDetails = ({
 
   const handleToAddClick = () => {
     const hasDifferentRestaurantProduct = products.some(
-      (cartProduct) => cartProduct.restaurantId! == product.restaurantId,
+      (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
     );
 
     if (hasDifferentRestaurantProduct) {
