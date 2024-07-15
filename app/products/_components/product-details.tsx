@@ -59,7 +59,12 @@ const ProductDetails = ({
   const handleCloseConfirmationDialog = () =>
     setIsConfirmationDialogOpen(false);
 
-  const handleToAddClick = () => {
+  const addToCart = () => {
+    addProductsToCart(product, quantity);
+    setIsCartOpen(true);
+  };
+
+  const handleToAddToCartClick = () => {
     const hasDifferentRestaurantProduct = products.some(
       (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
     );
@@ -68,8 +73,7 @@ const ProductDetails = ({
       return setIsConfirmationDialogOpen(true);
     }
 
-    addProductsToCart(product, quantity);
-    setIsCartOpen(true);
+    addToCart();
   };
 
   const handleIncreaseQuantityClick = () =>
@@ -146,7 +150,10 @@ const ProductDetails = ({
         </div>
 
         <div className="mt-6 px-5">
-          <Button className="w-full font-semibold" onClick={handleToAddClick}>
+          <Button
+            className="w-full font-semibold"
+            onClick={handleToAddToCartClick}
+          >
             Adicionar à sacola
           </Button>
         </div>
@@ -177,7 +184,9 @@ const ProductDetails = ({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction>Esvaziar sacola e adicionar</AlertDialogAction>
+            <AlertDialogAction onClick={addToCart}>
+              Esvaziar sacola e adicionar
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -119,6 +119,14 @@ export const CartProvider = ({ children }: ICartProvider) => {
     }>,
     quantity: number,
   ) => {
+    const hasDifferentRestaurantProduct = products.some(
+      (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
+    );
+
+    if (hasDifferentRestaurantProduct) {
+      setProducts([]);
+    }
+
     const isProductAlreadyOnCart = products.some(
       (cartProduct) => cartProduct.id === product.id,
     );
