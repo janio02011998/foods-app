@@ -74,7 +74,8 @@ export const CartProvider = ({ children }: ICartProvider) => {
     );
   }, [products]);
 
-  const totalDiscounts = Math.abs(subTotalPrice - totalPrice);
+  const totalDiscounts =
+    subTotalPrice - totalPrice + Number(products?.[0]?.restaurant?.deliveryFee);
 
   const decreaseProductQuantity = (productId: string) => {
     return setProducts((prev) =>
