@@ -5,7 +5,13 @@ import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
 
-const Cart = () => {
+interface CartProps {
+  // eslint-disable-next-line no-unused-vars
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+// eslint-disable-next-line no-unused-vars
+const Cart = ({ setIsOpen }: CartProps) => {
   const { products, totalPrice, subTotalPrice, totalDiscounts } = useCart();
 
   return (
