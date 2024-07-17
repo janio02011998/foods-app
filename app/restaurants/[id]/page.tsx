@@ -5,6 +5,7 @@ import Image from "next/image";
 import { StarIcon } from "lucide-react";
 import DeliveryInfo from "@/app/_components/delivery-info";
 import ProductList from "@/app/_components/product-list";
+import CartBanner from "../_components/cart-banner";
 
 interface RestaurantPageProps {
   params: {
@@ -76,11 +77,9 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
           <span className="text-xs font-semibold">5.0</span>
         </div>
       </div>
-
       <div className="px-5">
         <DeliveryInfo restaurant={restaurant} />
       </div>
-
       <div className="mt-3 flex gap-4 overflow-x-scroll px-5 [&::-webkit-scrollbar]:hidden">
         {restaurant.categories.map((category) => (
           <div
@@ -93,18 +92,17 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
           </div>
         ))}
       </div>
-
       <div className="mt-6 space-y-4">
         <h2 className="px-5 font-semibold">Mais pedidos</h2>
         <ProductList products={restaurant.products} />
       </div>
-
       {restaurant.categories.map((category) => (
         <div className="my-6 space-y-4" key={category.id}>
           <h2 className="px-5 font-semibold">{category.name}</h2>
           <ProductList products={category.products} />
         </div>
       ))}
+      <CartBanner restaurant={restaurant} />
     </div>
   );
 };
